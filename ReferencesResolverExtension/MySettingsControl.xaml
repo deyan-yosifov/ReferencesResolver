@@ -1,0 +1,101 @@
+﻿<UserControl x:Class="Telerik.ReferencesResolverExtension.MySettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewmodels="clr-namespace:Telerik.ReferencesResolverExtension.ViewModels"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             Background="{DynamicResource VsBrush.Window}"
+             Foreground="{DynamicResource VsBrush.WindowText}"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             Name="MyToolWindow">
+    <UserControl.Resources>
+        <ResourceDictionary Source="StylesDictionary.xaml" />
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="3">
+            <TextBlock Margin="2" VerticalAlignment="Center">Select command:</TextBlock>
+            <ComboBox ItemsSource="{Binding ResolveReferencesCommands}" SelectedIndex="{Binding SelectedCommandIndex}" DisplayMemberPath="CommandName" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="3" Orientation="Horizontal">
+            <Button Command="{Binding ExecuteCommand}" Margin="3">Execute command</Button>
+            <Button Command="{Binding CreateCommand}" Margin="3">Create command</Button>
+            <Button Command="{Binding DeleteCommand}" Margin="3">Delete command</Button>
+        </StackPanel>
+
+        <GroupBox Header="Command settings" Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="3" Orientation="Horizontal">
+                    <TextBlock VerticalAlignment="Center" >Command name:</TextBlock>
+                    <TextBox Margin="5" MinWidth="100" MaxWidth="300" Text="{Binding SelectedCommandViewModel.CommandName, Mode=TwoWay}" />
+                </StackPanel>
+
+                <GroupBox Grid.Row="1" Margin="3" Header="Folders with references to replace">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <Button Command="{Binding SelectedCommandViewModel.AddFolderCommand}" Margin="3">Add folder</Button>
+                            <Button Command="{Binding SelectedCommandViewModel.AddFolderFromArchiveCommand}" Margin="3">Add folder from archive</Button>
+                            <Button Command="{Binding SelectedCommandViewModel.RemoveFolderCommand}" Margin="3">Remove folder</Button>
+                        </StackPanel>
+                        <ListBox Grid.Row="1" SelectionMode="Single" SelectedIndex="{Binding SelectedCommandViewModel.SelectedFolderIndex, Mode=TwoWay}"
+                                 ItemsSource="{Binding SelectedCommandViewModel.ReferencesToReplace}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CopyFolderPath}" Margin="10" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Grid.Row="2" Margin="3" Header="References that must be included">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <Button Command="{Binding SelectedCommandViewModel.AddReferenceCommand}" Margin="3">Add reference</Button>
+                            <Button Command="{Binding SelectedCommandViewModel.RemoveReferenceCommand}" Margin="3">Remove reference</Button>
+                        </StackPanel>
+                        <ListBox Grid.Row="1" SelectionMode="Single" SelectedIndex="{Binding SelectedCommandViewModel.SelectedReferenceIndex, Mode=TwoWay}"
+                                 ItemsSource="{Binding SelectedCommandViewModel.ReferencesToResolve}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Name}" Margin="1" />
+                                        <TextBlock Text="{Binding Path}" Margin="1" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Grid.Row="3" Margin="10" Orientation="Horizontal">
+            <Button Command="{Binding SaveChangesCommand}" Margin="3">Save Changes</Button>
+        </StackPanel>
+      
+        <xctk:BusyIndicator Grid.RowSpan="4" IsBusy="{Binding IsBusy}" BusyContent="{Binding BusyMessage}" />
+    </Grid>
+</UserControl>

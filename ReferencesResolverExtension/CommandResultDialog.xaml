@@ -1,0 +1,25 @@
+﻿<Window x:Class="Telerik.ReferencesResolverExtension.CommandResultDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding HeaderText}" Height="300" Width="500">
+    <Window.Resources>
+        <ResourceDictionary Source="StylesDictionary.xaml" />        
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ListBox Grid.Row="0" SelectionMode="Single" SelectedIndex="{Binding SelectedResultLineIndex, Mode=TwoWay}" ItemsSource="{Binding ResultLines}"
+                 SelectionChanged="ListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Margin="2" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Row="1" HorizontalAlignment="Right" Margin="10 3" Padding="2"
+                Command="{Binding FinishCommand}" IsEnabled="{Binding IsFinishButtonEnabled}">OK</Button>
+    </Grid>
+</Window>
