@@ -48,6 +48,10 @@
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
       </Group>
 
+      <Group guid="guidReferencesResolverExtensionCmdSet" id="MyContextMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_REFERENCEROOT"/>
+      </Group>
+
       <Group guid="guidReferencesResolverExtensionCmdSet" id="MyToolsMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
