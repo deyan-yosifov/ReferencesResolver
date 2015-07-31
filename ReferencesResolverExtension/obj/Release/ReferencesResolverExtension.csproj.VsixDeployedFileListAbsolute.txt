@@ -1,0 +1,7 @@
+C:\Users\dyosifov\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\deyan.yosifov@telerik.com\ReferencesResolverExtension\1.4.9\\ReferencesResolverExtension.dll
+C:\Users\dyosifov\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\deyan.yosifov@telerik.com\ReferencesResolverExtension\1.4.9\\Deyo.Controls.dll
+C:\Users\dyosifov\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\deyan.yosifov@telerik.com\ReferencesResolverExtension\1.4.9\\Newtonsoft.Json.dll
+C:\Users\dyosifov\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\deyan.yosifov@telerik.com\ReferencesResolverExtension\1.4.9\\Xceed.Wpf.Toolkit.dll
+C:\Users\dyosifov\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\deyan.yosifov@telerik.com\ReferencesResolverExtension\1.4.9\\ReferencesResolverExtension.pkgdef
+C:\Users\dyosifov\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\deyan.yosifov@telerik.com\ReferencesResolverExtension\1.4.9\\extension.vsixmanifest
+C:\Users\dyosifov\AppData\Local\Microsoft\VisualStudio\11.0Exp\Extensions\deyan.yosifov@telerik.com\ReferencesResolverExtension\1.4.9\\ReferencesResolverExtension.pdb
