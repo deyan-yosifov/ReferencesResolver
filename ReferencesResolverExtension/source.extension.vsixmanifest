@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="48e79884-e68f-41e3-8260-99660e5f76c9" Version="1.4.9" Language="en-US" Publisher="deyan.yosifov@telerik.com" />
+    <Identity Id="48e79884-e68f-41e3-8260-99660e5f76c9" Version="1.5.0" Language="en-US" Publisher="deyan.yosifov@telerik.com" />
     <DisplayName>ReferencesResolverExtension</DisplayName>
     <Description>This extension allows you to easily add/remove multiple references to some project.</Description>
   </Metadata>
   <Installation InstalledByMsi="false">
-    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0, 12.0]" />
+    <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[11.0, 14.0]" />
   </Installation>
   <Dependencies>
     <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="4.5" />
