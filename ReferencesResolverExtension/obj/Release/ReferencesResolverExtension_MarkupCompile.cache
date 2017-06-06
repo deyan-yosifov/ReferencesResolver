@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Users\dyosifov\Documents\GitHub\ReferencesResolver\ReferencesResolverExtension\obj\Release\
+D:\Source\Repos\ReferencesResolver\ReferencesResolverExtension\obj\Release\
 Telerik.ReferencesResolverExtension
 none
 false
@@ -13,8 +13,8 @@ CODE_ANALYSIS;TRACE
 4422960526
 1-1271517523
 26-434570077
-34-1477722080
+291242049884
 CommandResultDialog.xaml;MySettingsControl.xaml;ResolveReferencesCommandDialog.xaml;StylesDictionary.xaml;
 
-False
+True
 
