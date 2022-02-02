@@ -218,7 +218,7 @@ namespace Microsoft.VsSDK.IntegrationTestLibrary
             IVsSolution solutionService = (IVsSolution)VsIdeTestHostContext.ServiceProvider.GetService(typeof(IVsSolution));
             solutionService.CreateSolution(solutionDirectory, solutionName, (uint)__VSCREATESOLUTIONFLAGS.CSF_SILENT);
             solutionService.SaveSolutionElement((uint)__VSSLNSAVEOPTIONS.SLNSAVEOPT_ForceSave, null, 0);
-            DTE dte = VsIdeTestHostContext.Dte;
+            DTE2 dte = (DTE2)VsIdeTestHostContext.Dte;
             Assert.AreEqual(solutionName + ".sln", Path.GetFileName(dte.Solution.FileName), "Newly created solution has wrong Filename");
         }
 
@@ -393,7 +393,7 @@ namespace Microsoft.VsSDK.IntegrationTestLibrary
             object Customout = null;
             string guidString = cmd.Guid.ToString("B").ToUpper();
             int cmdId = cmd.ID;
-            DTE dte = VsIdeTestHostContext.Dte;
+            DTE2 dte = (DTE2)VsIdeTestHostContext.Dte;
             dte.Commands.Raise(guidString, cmdId, ref Customin, ref Customout);
         }
 

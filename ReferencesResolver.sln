@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32120.378
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferencesResolverExtension", "ReferencesResolverExtension\ReferencesResolverExtension.csproj", "{55C7680D-BC4C-4918-A6FD-C945A585390F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferencesResolverExtension_IntegrationTests", "ReferencesResolverExtension\ReferencesResolverExtension_IntegrationTests\ReferencesResolverExtension_IntegrationTests.csproj", "{30D7FD50-4AA1-43EF-94C0-E07EEF570D68}"
@@ -14,21 +16,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReferencesResolverExtension_UnitTests", "ReferencesResolverExtension\ReferencesResolverExtension_UnitTests\ReferencesResolverExtension_UnitTests.csproj", "{AC38CA95-5326-474D-ABF9-D54991158203}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://tfs:8082/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = ReferencesResolverExtension\\ReferencesResolverExtension.csproj
-		SccProjectName1 = ReferencesResolverExtension
-		SccLocalPath1 = ReferencesResolverExtension
-		SccProjectUniqueName2 = ReferencesResolverExtension\\ReferencesResolverExtension_IntegrationTests\\ReferencesResolverExtension_IntegrationTests.csproj
-		SccProjectName2 = ReferencesResolverExtension/ReferencesResolverExtension_IntegrationTests
-		SccLocalPath2 = ReferencesResolverExtension\\ReferencesResolverExtension_IntegrationTests
-		SccProjectUniqueName3 = ReferencesResolverExtension\\ReferencesResolverExtension_UnitTests\\ReferencesResolverExtension_UnitTests.csproj
-		SccProjectName3 = ReferencesResolverExtension/ReferencesResolverExtension_UnitTests
-		SccLocalPath3 = ReferencesResolverExtension\\ReferencesResolverExtension_UnitTests
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -49,5 +36,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {85DF6115-FFAF-4C44-A6C7-6123B6FE3F12}
 	EndGlobalSection
 EndGlobal
