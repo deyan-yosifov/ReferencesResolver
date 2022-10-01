@@ -6,7 +6,8 @@
     <Description>This extension allows you to easily add/remove multiple references to some projects.</Description>
   </Metadata>
   <Installation InstalledByMsi="false">
-	  <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 18.0)" />
+	  <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[15.0, 17.0)" />
+	  <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.0, 18.0)" >
 		  <ProductArchitecture>amd64</ProductArchitecture>
 	  </InstallationTarget>
   </Installation>
