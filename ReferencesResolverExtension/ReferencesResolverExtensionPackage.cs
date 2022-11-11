@@ -53,7 +53,6 @@ namespace Telerik.ReferencesResolverExtension
 
         static ReferencesResolverExtensionPackage()
         {
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings { MaxDepth = 128 };
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 
             DefaultUserSettings = new UserSettingsModel()
