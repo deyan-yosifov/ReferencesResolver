@@ -1,44 +1,51 @@
-﻿using System;
+﻿using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.Settings;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using Microsoft.VisualStudio.Shell.Settings;
+using Newtonsoft.Json;
+using System;
+using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.ComponentModel.Design;
-using Microsoft.VisualStudio;
-using Microsoft.VisualStudio.Shell.Interop;
-using Microsoft.VisualStudio.Shell;
-using Telerik.ReferencesResolverExtension.Models;
-using Microsoft.VisualStudio.Shell.Settings;
-using Microsoft.VisualStudio.Settings;
-using Newtonsoft.Json;
-using System.Reflection;
 using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+
+using System.Threading;
+using System.Threading.Tasks;
+using Telerik.ReferencesResolverExtension.Models;
 
 namespace Telerik.ReferencesResolverExtension
-{   
-    /// <summary>
-    /// This is the class that implements the package exposed by this assembly.
-    ///
-    /// The minimum requirement for a class to be considered a valid package for Visual Studio
-    /// is to implement the IVsPackage interface and register itself with the shell.
-    /// This package uses the helper classes defined inside the Managed Package Framework (MPF)
-    /// to do it: it derives from the Package class that provides the implementation of the 
-    /// IVsPackage interface and uses the registration attributes defined in the framework to 
-    /// register itself and its components with the shell.
-    /// </summary>
-    // This attribute tells the PkgDef creation utility (CreatePkgDef.exe) that this class is
-    // a package.
-    [PackageRegistration(UseManagedResourcesOnly = true)]
-    // This attribute is used to register the information needed to show this package
-    // in the Help/About dialog of Visual Studio.
-    [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+{
+	/// <summary>
+	/// This is the class that implements the package exposed by this assembly.
+	/// </summary>
+	/// <remarks>
+	/// <para>
+	/// The minimum requirement for a class to be considered a valid package for Visual Studio
+	/// is to implement the IVsPackage interface and register itself with the shell.
+	/// This package uses the helper classes defined inside the Managed Package Framework (MPF)
+	/// to do it: it derives from the Package class that provides the implementation of the
+	/// IVsPackage interface and uses the registration attributes defined in the framework to
+	/// register itself and its components with the shell. These attributes tell the pkgdef creation
+	/// utility what data to put into .pkgdef file.
+	/// </para>
+	/// <para>
+	/// To get loaded into VS, the package must be referred by &lt;Asset Type="Microsoft.VisualStudio.VsPackage" ...&gt; in .vsixmanifest file.
+	/// </para>
+	/// </remarks>
+	[PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
+	// This attribute is used to register the information needed to show this package
+	// in the Help/About dialog of Visual Studio.
+	[InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     // This attribute is needed to let the shell know that this package exposes some menus.
     [ProvideMenuResource("Menus.ctmenu", 1)]
     // This attribute registers a tool window exposed by this package.
     [ProvideToolWindow(typeof(MyToolWindow))]
     [Guid(GuidList.guidReferencesResolverExtensionPkgString)]
-    public sealed class ReferencesResolverExtensionPackage : Package
-    {
+    public sealed class ReferencesResolverExtensionPackage : AsyncPackage
+	{
         private const string PathCollectionString = "ReferencesResolverExtension";
         private const string UserSettingsProperty = "UserSettings";
         private static readonly UserSettingsModel DefaultUserSettings;
@@ -46,7 +53,6 @@ namespace Telerik.ReferencesResolverExtension
 
         static ReferencesResolverExtensionPackage()
         {
-            JsonConvert.DefaultSettings = () => new JsonSerializerSettings { MaxDepth = 128 };
             AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(CurrentDomain_AssemblyResolve);
 
             DefaultUserSettings = new UserSettingsModel()
@@ -191,21 +197,24 @@ namespace Telerik.ReferencesResolverExtension
             Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
         }
 
-        /////////////////////////////////////////////////////////////////////////////
-        // Overridden Package Implementation
-        #region Package Members
+		/////////////////////////////////////////////////////////////////////////////
+		// Overridden Package Implementation
+		#region Package Members
 
-        /// <summary>
-        /// Initialization of the package; this method is called right after the package is sited, so this is the place
-        /// where you can put all the initialization code that rely on services provided by VisualStudio.
-        /// </summary>
-        protected override void Initialize()
-        {
+		/// <summary>
+		/// Initialization of the package; this method is called right after the package is sited, so this is the place
+		/// where you can put all the initialization code that rely on services provided by VisualStudio.
+		/// </summary>
+		/// <param name="cancellationToken">A cancellation token to monitor for initialization cancellation, which can occur when VS is shutting down.</param>
+		/// <param name="progress">A provider for progress updates.</param>
+		/// <returns>A task representing the async work of package initialization, or an already completed task if there is none. Do not return null from this method.</returns>
+		protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
+		{
             Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             base.Initialize();
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
-            OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
+            OleMenuCommandService mcs = await GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
             if ( null != mcs )
             {
                 // Create the command for the menu item.
@@ -435,7 +444,7 @@ namespace Telerik.ReferencesResolverExtension
         private static UserSettingsModel GetUserSettingsFromJson(string json)
         {
             UserSettingsModel userSettings = JsonConvert.DeserializeObject<UserSettingsModel>(json);
-            
+
             return userSettings;
         }
 
